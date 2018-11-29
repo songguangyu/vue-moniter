@@ -1,10 +1,13 @@
 # vue-moniter
-欢迎使用 vue-moniter
-## why use vue moniter
-在使用vue项目中 我们使用传统的dom.ready 或者 常规的 preformance 根本无法统计到真正的vue项目首屏时间
-甚至很多vue使用者使用了非常多的异步在项目，这些改怎么统计呢？
 
-## api
+欢迎使用 vue-moniter
+
+## 为什么我们使用 vue moniter
+
+在使用vue项目中，我们使用传统的 **dom.ready** 或者 **preformance** 根本无法统计到真正的vue项目首屏时间
+甚至很多vue使用者使用了非常多的异步模块在项目中，这些该怎么统计呢？
+
+## demo
 ```
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -85,11 +88,14 @@ const rootVue = new Vue({
 console.log(moniter.init(rootVue, Vue))
 rootVue.$mount('#app')
 
+## api
+
 ```
 ### moniter.push
 
 如果在多入口的vue项目中 可以把多个rootVue对象push进来
 
 ### moniter.init(rootVue, Vue)
+
 rootVue vue项目的根节点可以是数组
 Vue import的Vue对象
