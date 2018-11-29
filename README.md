@@ -87,10 +87,10 @@ const rootVue = new Vue({
 })
 console.log(moniter.init(rootVue, Vue))
 rootVue.$mount('#app')
+```
 
 ## api
 
-```
 ### moniter.push
 
 如果在多入口的vue项目中 可以把多个rootVue对象push进来
