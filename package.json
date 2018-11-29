@@ -1,0 +1,52 @@
+{
+  "name": "vue-moniter",
+  "version": "1.0.0",
+  "description": "vue-moniter",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node examples/server.js",
+    "dev:dist": "rollup -wm -c build/rollup.dev.config.js",
+    "build": "node build/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songguangyu/vue-moniter.git"
+  },
+  "keywords": [
+    "moniter",
+    "vue"
+  ],
+  "author": "songguangyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/songguangyu/vue-moniter/issues"
+  },
+  "homepage": "https://github.com/songguangyu/vue-moniter#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow-vue": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "es6-promise": "^4.0.5",
+    "express": "^4.16.2",
+    "express-urlrewrite": "^1.2.0",
+    "rollup": "^0.50.0",
+    "rollup-plugin-buble": "^0.16.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-flow-no-whitespace": "^1.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-watch": "^4.0.0",
+    "selenium-server": "^2.53.1",
+    "uglify-js": "^3.1.3",
+    "vue": "^2.5.0",
+    "vue-loader": "^13.3.0",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.5.0",
+    "webpack": "^3.7.1",
+    "webpack-dev-middleware": "^1.9.0"
+  }
+}
