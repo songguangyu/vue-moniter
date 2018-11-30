@@ -1,8 +1,10 @@
 {
   "name": "vue-moniter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue-moniter",
-  "main": "index.js",
+  "main": "dist/vue-moniter.common.js",
+  "module": "dist/vue-moniter.esm.js",
+  "unpkg": "dist/vue-moniter.js",
   "scripts": {
     "dev": "node examples/server.js",
     "dev:dist": "rollup -wm -c build/rollup.dev.config.js",
@@ -17,7 +19,7 @@
     "vue"
   ],
   "author": "songguangyu",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/songguangyu/vue-moniter/issues"
   },

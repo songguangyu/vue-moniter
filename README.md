@@ -85,7 +85,7 @@ const rootVue = new Vue({
     </div>
   `
 })
-console.log(moniter.init(rootVue, Vue))
+moniter.init(rootVue, Vue)
 rootVue.$mount('#app')
 ```
 
