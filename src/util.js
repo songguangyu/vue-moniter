@@ -1,3 +1,4 @@
+const startTime = Date.now() - 0
 export function watcher (obj, name, fn) {
   let tmpVal = obj.name
   Object.defineProperty(obj, name, {
@@ -12,7 +13,12 @@ export function watcher (obj, name, fn) {
 }
 
 export function getLiveTime () {
-  return Math.floor(window.performance.now())
+  if (window.performance.now) {
+    return Math.floor(window.performance.now() )
+  } else {
+    const nowTime = Date.now() - 0
+    return Math.floor(startTime - nowTime)
+  }
 }
 
 export function allAsyncMount (cg) {

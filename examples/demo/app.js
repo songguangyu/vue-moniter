@@ -65,10 +65,7 @@ const router = new VueRouter({
     { path: '/', component: Home },
     {
       path: '/bar/a',
-      components: {
-        abc: () => import('./async.js'),
-        bbb: Ren
-      },
+      component: () =>import('./async.js'),
       children: [
         {
           path: 'b',
@@ -76,7 +73,7 @@ const router = new VueRouter({
         }
       ]
     },
-    { path: '/bar/a', component: Foo }
+    { path: '/bar/b', component: Foo }
   ]
 })
 
@@ -98,7 +95,7 @@ const cc = new Vue({
           <a>/bar</a>
         </router-link>
       </ul>
-      <router-view class="view" name="abc"></router-view>
+      <router-view class="view"></router-view>
     </div>
   `
 })

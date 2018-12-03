@@ -1,5 +1,5 @@
 /**
-  * vue-moniter v1.0.0
+  * vue-moniter v1.0.2
   * (c) 2018 Evan You
   * @license MIT
   */
@@ -9,6 +9,7 @@
 	(global.VueRouter = factory());
 }(this, (function () { 'use strict';
 
+var startTime = Date.now() - 0;
 function watcher (obj, name, fn) {
   var tmpVal = obj.name;
   Object.defineProperty(obj, name, {
@@ -23,7 +24,12 @@ function watcher (obj, name, fn) {
 }
 
 function getLiveTime () {
-  return Math.floor(window.performance.now())
+  if (window.performance.now) {
+    return Math.floor(window.performance.now() )
+  } else {
+    var nowTime = Date.now() - 0;
+    return Math.floor(startTime - nowTime)
+  }
 }
 
 function allAsyncMount (cg) {
@@ -90,7 +96,7 @@ function getAsyncComponentFromRouter (cg, target, Vue) {
   });
 }
 
-var routerGuard = function (cg) {
+var routerGuard = function (cg, target) {
   var router;
   for (var i = 0; i < cg.length; i++) {
     if (cg[0].$options.router) {
@@ -98,20 +104,37 @@ var routerGuard = function (cg) {
       break
     }
   }
-  var mode = router.mode;
-  if (mode === 'history') {
-    window.addEventListener('popstate', function (e) {
-      console.log(e);
+  watcher(router.app._route, 'fullPath', function(url) {
+    target.routerChange.push({
+      url: url,
+      memory: performance.memory,
+      time: getLiveTime()
     });
-  } else if (mode === 'hash') {
+  });
+};
 
-  }
+var statistics = function(target, Vue) {
+  target.componentNum = 0;
+  Vue.mixin({
+    created: function created() {
+      this.moniterData = {
+        startTime: getLiveTime()
+      };
+    },
+    mounted: function mounted () {
+      var moniterData = this.moniterData;
+      moniterData.endTime = getLiveTime();
+      moniterData.spendTime = moniterData.endTime - moniterData.startTime;
+      target.componentNum++;
+    }
+  });
 };
 
 var target = {
   vueStartMounttime: 0,
   vueSyncLoadtime: 0,
-  vueAsyncLoadtime: 0
+  vueAsyncLoadtime: 0,
+  routerChange: []
 };
 // vue开始渲染
 target.vueStartMounttime = getLiveTime();
@@ -120,6 +143,8 @@ var index = {
   cg: [],
   init: function init (cg, Vue) {
     this.cg = this.cg.concat(cg);
+    // 注册统计组件
+    statistics(target, Vue);
     // 获取所有同步组件
     getSyncComponentMountTime(this.cg, target);
     // 获取所有异步组件

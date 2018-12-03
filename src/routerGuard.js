@@ -1,4 +1,6 @@
-export default function (cg) {
+import { watcher, getLiveTime } from './util'
+
+export default function (cg, target) {
   let router
   for (let i = 0; i < cg.length; i++) {
     if (cg[0].$options.router) {
@@ -7,11 +9,12 @@ export default function (cg) {
     }
   }
   const mode = router.mode
-  if (mode === 'history') {
-    window.addEventListener('popstate', e => {
-      console.log(e)
+  // 监控fullpath变化 包括hash的变化
+  watcher(router.app._route, 'fullPath', function(url) {
+    target.routerChange.push({
+      url: url,
+      memory: performance.memory,
+      time: getLiveTime()
     })
-  } else if (mode === 'hash') {
-
-  }
+  })
 }
